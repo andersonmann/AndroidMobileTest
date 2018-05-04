@@ -8,11 +8,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import core.BaseTest;
+import core.DriverFactory;
 import page.FormularioPage;
 import page.MenuPage;
 
@@ -67,5 +72,16 @@ public class FormularioTeste extends BaseTest {
 		assertEquals("Console: switch", formulario.obterConsoleCadastrado());
 		assertTrue(formulario.obterCheckCadastrado().endsWith("Off"));
 		assertTrue(formulario.obterSwitchCadastrado().endsWith("Marcado"));
+	}
+
+	@Test
+	public void deveRealizarCadastroDemorado() throws MalformedURLException {
+		formulario.escreverNome("Anderson Mann");
+		formulario.salvarDemorado();
+
+		WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Anderson Mann']")));
+		
+		assertEquals("Nome: Anderson Mann", formulario.obterNomeCadastrado());
 	}
 }

@@ -34,7 +34,7 @@ public class DriverFactory {
 		desiredCapabilities.setCapability("deviceName", "emulator-5556");
 		desiredCapabilities.setCapability("automationName", "uiautomator2");
 		desiredCapabilities.setCapability(MobileCapabilityType.APP,
-				"C:\\Users\\anderson.mann\\eclipse-workspace\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
+				"C:\\Users\\anderson.mann\\git\\androidMobileTest\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
 		try {
 			driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
 		} catch (MalformedURLException e) {
