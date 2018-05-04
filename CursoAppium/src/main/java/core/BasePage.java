@@ -5,7 +5,11 @@ package core;
 
 import static core.DriverFactory.getDriver;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+
+import io.appium.java_client.MobileElement;
 
 /**
  * @author anderson.mann
@@ -37,4 +41,10 @@ public class BasePage {
 	public boolean isCheckMarcado(By by) {
 		return getDriver().findElement(by).getAttribute("checked").equals("true");
 	}
+
+	public boolean existeElementosPorTexto(String texto) {
+		List<MobileElement> elementos = getDriver().findElements(By.xpath("//*[@text='" + texto + "']"));
+		return elementos.size() > 0;
+	}
+
 }
