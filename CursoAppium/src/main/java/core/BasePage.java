@@ -46,5 +46,4 @@ public class BasePage {
 		List<MobileElement> elementos = getDriver().findElements(By.xpath("//*[@text='" + texto + "']"));
 		return elementos.size() > 0;
 	}
-
 }

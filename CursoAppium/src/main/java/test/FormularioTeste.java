@@ -8,7 +8,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import core.BaseTest;
 import core.DriverFactory;
+import io.appium.java_client.MobileBy;
 import page.FormularioPage;
 import page.MenuPage;
 
@@ -81,7 +81,25 @@ public class FormularioTeste extends BaseTest {
 
 		WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Anderson Mann']")));
-		
+
 		assertEquals("Nome: Anderson Mann", formulario.obterNomeCadastrado());
 	}
+
+	@Test
+	public void deveAlterarData() {
+		formulario.clicarPorTexto("01/01/2000");
+		formulario.clicarPorTexto("20");
+		formulario.clicarPorTexto("OK");
+		assertTrue(formulario.existeElementosPorTexto("20/2/2000"));
+	}
+
+	@Test
+	public void deveAlterarHora() {
+		formulario.clicarPorTexto("06:00");
+		formulario.clicar(MobileBy.AccessibilityId("10"));
+		formulario.clicar(MobileBy.AccessibilityId("40"));
+		formulario.clicarPorTexto("OK");
+		assertTrue(formulario.existeElementosPorTexto("10:40"));
+	}
+
 }
