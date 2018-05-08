@@ -3,10 +3,13 @@
  */
 package page;
 
+import static core.DriverFactory.getDriver;
+
 import org.openqa.selenium.By;
 
 import core.BasePage;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 /**
  * @author anderson.mann
@@ -62,10 +65,23 @@ public class FormularioPage extends BasePage {
 		return obterTexto(By.xpath("//android.widget.TextView[starts-with(@text, 'Checkbox:')]"));
 	}
 
+	public void clicarSeekBar(double posicao) {
+		int delta = 50;
+
+		MobileElement seek = getDriver().findElement(MobileBy.AccessibilityId("slid"));
+		int y = seek.getLocation().y + (seek.getSize().height / 2);
+		System.out.println(y);
+
+		int xinicial = seek.getLocation().x + delta;
+		int x = (int) (xinicial + ((seek.getSize().width - 2 * delta) * posicao));
+		System.out.println(x);
+		tap(x, y);
+	}
+
 	public void salvar() {
 		clicarPorTexto("SALVAR");
 	}
-	
+
 	public void salvarDemorado() {
 		clicarPorTexto("SALVAR DEMORADO");
 	}

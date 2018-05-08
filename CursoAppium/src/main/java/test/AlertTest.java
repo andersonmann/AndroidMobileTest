@@ -4,7 +4,9 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import core.BaseTest;
@@ -20,11 +22,13 @@ public class AlertTest extends BaseTest {
 	private MenuPage menu = new MenuPage();
 	private AlertaPage alerta = new AlertaPage();
 
+	@Before
+	public void setup() {
+		menu.acessarAlertas();
+	}
+
 	@Test
 	public void deveConfirmarAlerta() {
-		// acessar menu alerta
-		menu.acessarAlertas();
-
 		// clicar em alerta confirm
 		alerta.clicarAlertaConfirm();
 
@@ -41,4 +45,18 @@ public class AlertTest extends BaseTest {
 		// sair
 		alerta.sair();
 	}
+
+	@Test
+	public void deveClicarForaAlerta() {
+		// clicar alerta simples
+		alerta.clicarAlertaSimples();
+
+		// clicar fora da caixa
+		esperar(1000);
+		alerta.clicarForaCaixa();
+
+		// verificar que a mensagem não está presente
+		assertFalse(alerta.existeElementosPorTexto("Pode clicar no OK ou fora da caixa para sair"));
+	}
+
 }
