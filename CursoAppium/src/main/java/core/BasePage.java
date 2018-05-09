@@ -62,12 +62,37 @@ public class BasePage {
 		new TouchAction(getDriver()).tap(x, y).perform();
 	}
 
+	public void scrollDown() {
+		scroll(0.9, 0.1);
+	}
+
+	public void scrollUp() {
+		scroll(0.1, 0.9);
+	}
+
 	public void scroll(double inicio, double fim) {
 		Dimension size = getDriver().manage().window().getSize();
 		int x = size.width / 2;
 		int start_y = (int) (size.height * inicio);
 		int end_y = (int) (size.height * fim);
 		new TouchAction(getDriver()).press(x, start_y).waitAction(Duration.ofMillis(500)).moveTo(x, end_y).release()
+				.perform();
+	}
+
+	public void swipeLeft() {
+		swipe(0.1, 0.9);
+	}
+
+	public void swipeRight() {
+		swipe(0.9, 0.1);
+	}
+
+	public void swipe(double inicio, double fim) {
+		Dimension size = getDriver().manage().window().getSize();
+		int y = size.height / 2;
+		int start_x = (int) (size.width * inicio);
+		int end_x = (int) (size.width * fim);
+		new TouchAction(getDriver()).press(start_x, y).waitAction(Duration.ofMillis(500)).moveTo(end_x, y).release()
 				.perform();
 	}
 
