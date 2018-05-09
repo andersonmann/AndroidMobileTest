@@ -5,6 +5,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import core.BaseTest;
@@ -20,17 +21,29 @@ public class CliquesTeste extends BaseTest {
 	private MenuPage menu = new MenuPage();
 	private CliquesPage cliques = new CliquesPage();
 
-	@Test
-	public void deveRealizarCliqueLongo() {
+	@Before
+	public void setup() {
 		// acessar menu
 		menu.acessarCliques();
+	}
 
+	@Test
+	public void deveRealizarCliqueLongo() {
 		// clique longo
 		cliques.cliqueLongo();
 
 		// verificar texto
 		assertEquals("Clique Longo", cliques.obterTextoPorCampo());
+	}
 
+	@Test
+	public void deveRealizarDuploClique() {
+		// duplo clique
+		cliques.clicarPorTexto("Clique duplo");
+		cliques.clicarPorTexto("Clique duplo");
+
+		// verificar texto
+		assertEquals("Duplo Clique", cliques.obterTextoPorCampo());
 	}
 
 }
