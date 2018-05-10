@@ -34,8 +34,16 @@ public class MenuPage extends BasePage {
 	public void acessarCliques() {
 		clicarPorTexto("Cliques");
 	}
-	
+
 	public void acessarSwipe() {
 		clicarPorTexto("Swipe");
-	}	
+	}
+
+	/***
+	 * Implementar Desafio Swipe
+	 */
+
+	public void acessarSBHibrido() {
+		clicarPorTexto("SeuBarriga Híbrido");
+	}
 }
